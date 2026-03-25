@@ -451,7 +451,7 @@ private fun SearchToolbar(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier.fillMaxWidth(),
     ) {
-        IconButton(onClick = { onBackClick() }) {
+        IconButton(onClick = { onBackClick() }, modifier = Modifier.testTag("backButtonIcon")) {
             Icon(
                 imageVector = NiaIcons.ArrowBack,
                 contentDescription = stringResource(
@@ -494,6 +494,7 @@ private fun SearchTextField(
                     id = searchR.string.feature_search_api_title,
                 ),
                 tint = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.testTag("loupeIconInSearchField")
             )
         },
         trailingIcon = {

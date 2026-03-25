@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 The Android Open Source Project
+ * Copyright 2026 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,21 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.nowinandroid.ui
+package com.google.samples.apps.nowinandroid.ui.lesson15.homework
 
-import androidx.annotation.StringRes
-import androidx.compose.ui.test.junit4.AndroidComposeTestRule
-import kotlin.properties.ReadOnlyProperty
+import io.github.kakaocup.compose.node.element.ComposeScreen
+import io.github.kakaocup.compose.node.element.KNode
 
-fun AndroidComposeTestRule<*, *>.stringResource(
-    @StringRes resId: Int,
-): ReadOnlyProperty<Any, String> =
-    ReadOnlyProperty { _, _ -> activity.getString(resId) }
+object SearchScreen : ComposeScreen<SearchScreen>() {
+    val backButton = child<KNode> {
+        hasTestTag("backButtonIcon")
+    }
+
+    val searchTextField = child<KNode> {
+        hasTestTag("searchTextField")
+    }
+
+    val iconInSearchField = child<KNode> {
+        hasTestTag("loupeIconInSearchField")
+    }
+}
