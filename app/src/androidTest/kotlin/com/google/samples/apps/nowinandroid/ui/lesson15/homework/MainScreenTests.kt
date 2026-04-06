@@ -29,18 +29,46 @@ class MainScreenTests : BaseClass() {
                 step("Проверка тайтле навбара") {
                     toolbarTitle.assertTextEquals("Now in Android")
                 }
+            }
+        }
+    }
+    @Test
+    fun checkSearchButtonInToolbar() {
+        run {
+            MainScreen {
                 step("Проверка наличия кнопки поиска в навбаре") {
-                    searchButton.assertIsDisplayed()
+                searchButton.assertIsDisplayed()
                 }
+            }
+        }
+    }
+   @Test
+    fun checkSettingsButtonInToolbar() {
+        run {
+            MainScreen {
                 step("Проверка наличия кнопки настроек") {
                     settingsButton.assertIsDisplayed()
                 }
+            }
+        }
+    }
+    @Test
+    fun checkTextInMainScreen() {
+        run {
+            MainScreen {
                 step("Проверка текста в тайтле над списком") {
                     titleTextUnderList.assertTextEquals("What are you interested in?")
                 }
                 step("Проверка текст в сабтайтле над списком") {
-                    subtitleTextUnderList.assertTextContains("Updates from topics", substring = true, ignoreCase = false)
-                } // как сделать через assertTextContains?
+                    subtitleTextUnderList.assertTextEquals("Updated from topics")
+                }
+            }
+        }
+    }
+    @Test
+    fun checkDoneButton() {
+        run {
+            MainScreen {
                 step("Проверка отображения кнопки done") {
                     doneButton.assertIsDisplayed()
                 }

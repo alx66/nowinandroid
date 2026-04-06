@@ -34,3 +34,4 @@ abstract class BaseClass : TestCase(Kaspresso.Builder.withComposeSupport()) {
     @get:Rule(order = 2)
     val kakaoRule = KakaoComposeTestRule(composeTestRule, true)
 }
+

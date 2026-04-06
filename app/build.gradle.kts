@@ -26,6 +26,7 @@ plugins {
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.roborazzi)
     alias(libs.plugins.kotlin.serialization)
+
 }
 
 android {
@@ -143,7 +144,11 @@ dependencies {
         exclude(module = "protobuf-lite")
     }
     implementation("androidx.drawerlayout:drawerlayout:1.2.0")
-    androidTestImplementation("io.github.kakaocup:compose:1.1.0")
+    androidTestImplementation("io.github.kakaocup:compose:1.1.0"){
+        exclude(module = "protobuf-lite")
+    }
+    androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support:1.6.0")
+    {exclude(module = "protobuf-lite")}
 }
 
 baselineProfile {

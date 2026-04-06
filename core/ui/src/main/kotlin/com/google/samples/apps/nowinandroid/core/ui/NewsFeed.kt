@@ -39,6 +39,11 @@ import androidx.compose.ui.unit.dp
 import com.google.samples.apps.nowinandroid.core.analytics.LocalAnalyticsHelper
 import com.google.samples.apps.nowinandroid.core.designsystem.theme.NiaTheme
 import com.google.samples.apps.nowinandroid.core.model.data.UserNewsResource
+import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
+import androidx.compose.ui.platform.testTag
+import com.google.samples.apps.nowinandroid.core.designsystem.component.Tags
+import com.google.samples.apps.nowinandroid.core.designsystem.component.lazyListItemPosition
+
 
 /**
  * An extension on [LazyListScope] defining a feed with news resources.
@@ -54,11 +59,11 @@ fun LazyStaggeredGridScope.newsFeed(
     when (feedState) {
         NewsFeedUiState.Loading -> Unit
         is NewsFeedUiState.Success -> {
-            items(
+            itemsIndexed(
                 items = feedState.feed,
-                key = { it.id },
-                contentType = { "newsFeedItem" },
-            ) { userNewsResource ->
+                key = { _, item -> item.id },
+                contentType = { _, _ -> "newsFeedItem" },
+            ) { index, userNewsResource ->
                 val context = LocalContext.current
                 val analyticsHelper = LocalAnalyticsHelper.current
                 val backgroundColor = MaterialTheme.colorScheme.background.toArgb()
@@ -71,7 +76,9 @@ fun LazyStaggeredGridScope.newsFeed(
                         analyticsHelper.logNewsResourceOpened(
                             newsResourceId = userNewsResource.id,
                         )
-                        launchCustomChromeTab(context, Uri.parse(userNewsResource.url), backgroundColor)
+                        launchCustomChromeTab(context,
+                            Uri.parse(userNewsResource.url),
+                            backgroundColor,)
 
                         onNewsResourceViewed(userNewsResource.id)
                     },
@@ -85,7 +92,8 @@ fun LazyStaggeredGridScope.newsFeed(
                     onTopicClick = onTopicClick,
                     modifier = Modifier
                         .padding(horizontal = 8.dp)
-                        .animateItem(),
+                        .animateItem()
+                        .lazyListItemPosition(index),
                 )
             }
         }
